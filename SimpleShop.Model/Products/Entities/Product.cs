@@ -9,4 +9,5 @@ public class Product : BaseEntity
     public int Quantity { get; set; }
     public Count Count { get; set; }
     public int CountId { get; set; }
+
 }

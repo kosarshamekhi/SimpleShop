@@ -3,8 +3,8 @@
 public class ApplicationServiceResponse
 {
     private readonly List<string> _errors = new ();
-    public bool IsSuccess => !IssFailur;
-    public bool IssFailur => _errors.Any();
+    public bool IsSuccess => !IsFailur;
+    public bool IsFailur => _errors.Any();
 
     public void AddError(string errorMessage)
     {

@@ -12,7 +12,7 @@ using SimpleShop.DAL.DbContexts;
 namespace SimpleShop.DAL.Migrations
 {
     [DbContext(typeof(ShopDbContext))]
-    [Migration("20221001194832_init")]
+    [Migration("20221012141505_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
