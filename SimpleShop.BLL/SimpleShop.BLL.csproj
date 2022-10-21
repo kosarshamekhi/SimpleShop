@@ -15,8 +15,4 @@
     <ProjectReference Include="..\SimpleShop.Model\SimpleShop.Model.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Counts\Queries\" />
-  </ItemGroup>
-
 </Project>
