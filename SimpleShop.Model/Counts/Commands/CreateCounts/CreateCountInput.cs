@@ -1,11 +1,10 @@
 ﻿using MediatR;
-using SimpleShop.Model.Counts.Entities;
 using SimpleShop.Model.Framework;
 using System.ComponentModel.DataAnnotations;
 
-namespace SimpleShop.Model.Counts.Commands;
+namespace SimpleShop.Model.Counts.Commands.CreateCounts;
 
-public class CreateCount:IRequest<ApplicationServiceResponse<Count>>
+public class CreateCountInput : IRequest<ApplicationServiceResponse<CreateCountOutput>>
 {
     [Required]
     [StringLength(50, MinimumLength = 2)]

@@ -1,12 +1,14 @@
 ﻿using MediatR;
 using SimpleShop.Model.Framework;
-using SimpleShop.Model.Products.Entities;
 using System.ComponentModel.DataAnnotations;
 
-namespace SimpleShop.Model.Products.Commands;
+namespace SimpleShop.Model.Products.Commands.UpdateProducts;
 
-public class CreateProduct:IRequest<ApplicationServiceResponse<Product>>
+public class UpdateProductInput : IRequest<ApplicationServiceResponse<UpdateProductOutputt>>
 {
+    [Required]
+    [Range(1, int.MaxValue)]
+    public int ProductId { get; set; }
     [Required]
     [StringLength(50, MinimumLength = 2)]
     public string ProductName { get; set; }

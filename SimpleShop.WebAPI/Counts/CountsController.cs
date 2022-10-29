@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using SimpleShop.Model.Counts.Commands;
-using SimpleShop.Model.Counts.Queries;
+using SimpleShop.Model.Counts.Commands.CreateCounts;
+using SimpleShop.Model.Counts.Commands.DeleteCounts;
+using SimpleShop.Model.Counts.Commands.UpdateCounts;
+using SimpleShop.Model.Counts.Queries.FilterByName;
 using SimpleShop.WebAPI.Framework;
 
 namespace SimpleShop.WebAPI.Counts;
@@ -12,43 +14,31 @@ public class CountsController : BaseController
 	{
 	}
 	[HttpPost("CreateCount")]
-	public async Task<IActionResult> CreateCount(CreateCount count)
+	public async Task<IActionResult> CreateCount(CreateCountInput createCountInput)
 	{
-		var response = await _mediator.Send(count);
-        if (response.IsSuccess)
-		{
-			return Ok(response.Result);
-		}
+		var response = await _mediator.Send(createCountInput);
+   
 		return response.IsSuccess? Ok(response.Result): BadRequest(response.Errors);
     }
     [HttpPut("UpdateCount")]
-    public async Task<IActionResult> UpdateCount(UpdateCount count)
+    public async Task<IActionResult> UpdateCount(UpdateCountInput updateCountInput)
     {
-        var response = await _mediator.Send(count);
-        if (response.IsSuccess)
-        {
-            return Ok(response.Result);
-        }
+        var response = await _mediator.Send(updateCountInput);
+        
         return response.IsSuccess ? Ok(response.Result) : BadRequest(response.Errors);
     }
-    [HttpGet("FilterByNameCo")]
-    public async Task<IActionResult> SearchCount([FromQuery] FilterByNameCo count)
+    [HttpGet("FilterByName")]
+    public async Task<IActionResult> SearchCount([FromQuery] FilterByNameInput filterByNameInput)
     {
-        var response = await _mediator.Send(count);
-        if (response.IsSuccess)
-        {
-            return Ok(response.Result);
-        }
+        var response = await _mediator.Send(filterByNameInput);
+        
         return response.IsSuccess ? Ok(response.Result) : BadRequest(response.Errors);
     }
-    [HttpDelete("UpdateCount")]
-    public async Task<IActionResult> DeleteCount(DeleteCount count)
+    [HttpDelete("DeleteCount")]
+    public async Task<IActionResult> DeleteCount(DeleteCountInput deleteCountInput)
     {
-        var response = await _mediator.Send(count);
-        if (response.IsSuccess)
-        {
-            return Ok(response);
-        }
+        var response = await _mediator.Send(deleteCountInput);
+        
         return response.IsSuccess ? Ok(response) : BadRequest(response.Errors);
     }
 }

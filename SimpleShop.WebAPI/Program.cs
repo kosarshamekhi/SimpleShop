@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SimpleShop.BLL.Counts.Commands;
 using SimpleShop.BLL.Products.Commands;
+using SimpleShop.DAL.Counts;
 using SimpleShop.DAL.DbContexts;
 using SimpleShop.DAL.Framework;
 using SimpleShop.Model.Products.Commands;
@@ -13,14 +14,16 @@ builder.Services.AddDbContext<ShopDbContext>(c=>c.UseSqlServer("Server=.; Initia
     AddInterceptors(new AddAuditFieldInterceptor()));
 
 builder.Services.AddMediatR(
-    typeof(CreateCountHandler).Assembly,
-    typeof(CreateProductHandler).Assembly);
+    typeof(CreateCountAppService).Assembly,
+    typeof(CreateProductAppService).Assembly);
 //builder.Services.AddMediatR(typeof(CreateProductHandler).Assembly);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//builder.Services.AddScoped<CountRepository>();
 
 var app = builder.Build();
 
