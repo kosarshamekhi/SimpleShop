@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using SimpleShop.DAL.DbContexts;
+using SimpleShop.DAL.Counts;
 using SimpleShop.Model.Counts.Commands.CreateCounts;
 using SimpleShop.Model.Counts.Entities;
 using SimpleShop.Model.Framework;
@@ -8,11 +8,11 @@ namespace SimpleShop.BLL.Counts.Commands;
 
 public class CreateCountAppService : IRequestHandler<CreateCountInput, ApplicationServiceResponse<CreateCountOutput>>
 {
-    private readonly ShopDbContext _shopDbContext;
+    private readonly EfCountRepository _efCountRepository;
 
-    public CreateCountAppService(ShopDbContext shopDbContext)
+    public CreateCountAppService(EfCountRepository efCountRepository)
     {
-        _shopDbContext = shopDbContext;
+        _efCountRepository = efCountRepository;
     }
     public async Task<ApplicationServiceResponse<CreateCountOutput>> Handle(CreateCountInput createCountInput, CancellationToken cancellationToken)
     {
@@ -20,8 +20,8 @@ public class CreateCountAppService : IRequestHandler<CreateCountInput, Applicati
         {
             Name = createCountInput.CountName,
         };
-        await _shopDbContext.Counts.AddAsync(newCount);
-        await _shopDbContext.SaveChangesAsync();
+        
+        _efCountRepository.AddCount(newCount);
 
         return new ApplicationServiceResponse<CreateCountOutput>
         {

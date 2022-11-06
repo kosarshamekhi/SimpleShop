@@ -16,14 +16,13 @@ builder.Services.AddDbContext<ShopDbContext>(c=>c.UseSqlServer("Server=.; Initia
 builder.Services.AddMediatR(
     typeof(CreateCountAppService).Assembly,
     typeof(CreateProductAppService).Assembly);
-//builder.Services.AddMediatR(typeof(CreateProductHandler).Assembly);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddScoped<CountRepository>();
+builder.Services.AddScoped<ICountRepository, EfCountRepository>();
 
 var app = builder.Build();
 

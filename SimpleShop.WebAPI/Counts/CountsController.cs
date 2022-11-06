@@ -13,12 +13,13 @@ public class CountsController : BaseController
 	public CountsController(IMediator mediator) : base(mediator)
 	{
 	}
-	[HttpPost("CreateCount")]
-	public async Task<IActionResult> CreateCount(CreateCountInput createCountInput)
-	{
-		var response = await _mediator.Send(createCountInput);
-   
-		return response.IsSuccess? Ok(response.Result): BadRequest(response.Errors);
+
+    [HttpPost("CreateCount")]
+    public async Task<IActionResult> CreateCount(CreateCountInput createCountInput)
+    {
+        var response = await _mediator.Send(createCountInput);
+
+        return response.IsSuccess ? Ok(response.Result) : BadRequest(response.Errors);
     }
     [HttpPut("UpdateCount")]
     public async Task<IActionResult> UpdateCount(UpdateCountInput updateCountInput)
